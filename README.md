@@ -17,13 +17,13 @@ Installation of Production Environment of Shopware using CloudFormation Template
 
 1. Login to AWS account. 
 2. Search for CloudFormation. 
-   ![production2.png](https://github.com/wagento/shopware/blob/main/images/production2.png)
+   ![production2.png](https://github.com/wagento/shopware/blob/main/images/Production2.png)
 3. Click on the “Create stack” button. 
-   ![production3.png](https://github.com/wagento/shopware/blob/main/images/production3.png)
+   ![production3.png](https://github.com/wagento/shopware/blob/main/images/Production3.png)
 4. Select "Choose an existing template" > "Upload a template file" > Choose file.
-   ![production4.png](https://github.com/wagento/shopware/blob/main/images/production4.png)
+   ![production4.png](https://github.com/wagento/shopware/blob/main/images/Production4.png)
 5. Upload the CloudFormation template file and click "Next". 
-   ![production5.png](https://github.com/wagento/shopware/blob/main/images/production5.png)
+   ![production5.png](https://github.com/wagento/shopware/blob/main/images/Production5.png)
 6. Fill in the details: 
 
    - **Stack name**: Enter the name of the stack. 
@@ -44,7 +44,7 @@ Installation of Production Environment of Shopware using CloudFormation Template
    - **SSHLocation**: Enter the private CIDR mask or use the predefined subnet mask. 
    - **VpcCIDR**: Enter the VPC CIDR subnet mask or use the predefined subnet mask. 
 
-   ![production6.png](https://github.com/wagento/shopware/blob/main/images/production6.png)
+   ![production6.png](https://github.com/wagento/shopware/blob/main/images/Production6.png)
    
 7. Add tags and select the IAM Role. Click "Next" to deploy all resources. 
 
@@ -75,24 +75,24 @@ Installation of Production Environment of Shopware using CloudFormation Template
       vim .env # update the details
       ```
 
-   ![production7.png](https://github.com/wagento/shopware/blob/main/images/production7.png)
+   ![production7.png](https://github.com/wagento/shopware/blob/main/images/Production7.png)
 
 ### SSH Key Creation
 
 1. To create SSH Keys, search for "Key Pair". 
-   ![production8.png](https://github.com/wagento/shopware/blob/main/images/production8.png)
+   ![production8.png](https://github.com/wagento/shopware/blob/main/images/Production8.png)
 2. Click on "Create key pair". 
-   ![production9.png](https://github.com/wagento/shopware/blob/main/images/production9.png)
+   ![production9.png](https://github.com/wagento/shopware/blob/main/images/Production9.png)
 3. Add the name and create the key pair. 
-   ![production10.png](https://github.com/wagento/shopware/blob/main/images/production10.png)
+   ![production10.png](https://github.com/wagento/shopware/blob/main/images/Production10.png)
 
 ### IAM Role
 
 Add policies to IAM Role.
 
 1. Search for IAM and go to IAM roles.
-   ![production11.png](https://github.com/wagento/shopware/blob/main/images/production11.png)
+   ![production11.png](https://github.com/wagento/shopware/blob/main/images/Production11.png)
 2. Search for CloudFormation and select the Role name. 
-   ![production12.png](https://github.com/wagento/shopware/blob/main/images/production12.png)
+   ![production12.png](https://github.com/wagento/shopware/blob/main/images/Production12.png)
 3. Add the AmazonEC2FullAccess policy to the role by clicking "Add permissions" and selecting "Attach policies".
-   ![production13.png](https://github.com/wagento/shopware/blob/main/images/production13.png)
+   ![production13.png](https://github.com/wagento/shopware/blob/main/images/Production13.png)
