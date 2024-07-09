@@ -3,7 +3,8 @@
 # Shopware-Staging
 
 Deploy a staging environment for Shopware where the web server and database server reside on the same instance. This environment is ideal for testing and development purposes. 
-![staging1.jpg](/images/sa-team/shopware/staging1.jpg)
+<img align="right" alt="Coding" width="400" src=https://github.com/vinayaky7/vinayaky7/blob/main/212749447-bfb7e725-6987-49d9-ae85-2015e3e7cc41.gif>
+[https://github.com/wagento/shopware/edit/Stagingimages/staging1.jpg](https://github.com/wagento/shopware/blob/Staging/images/staging1.jpg)
 ## Prerequisites 
 
 ### Staging 
