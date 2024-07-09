@@ -22,7 +22,7 @@ Installation of Production Environment of Shopware using CloudFormation Template
    ![production3.png](https://github.com/wagento/shopware/blob/main/images/Production3.png)
 4. Select "Choose an existing template" > "Upload a template file" > Choose file.
    ![production4.png](https://github.com/wagento/shopware/blob/main/images/Production4.png)
-5. Upload the CloudFormation template file and click "Next". 
+5. Upload the CloudFormation template file and click "Next".
    ![production5.png](https://github.com/wagento/shopware/blob/main/images/Production5.png)
 6. Fill in the details: 
 
