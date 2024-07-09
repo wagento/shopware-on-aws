@@ -3,7 +3,9 @@
 # Shopware-Staging
 
 Deploy a staging environment for Shopware where the web server and database server reside on the same instance. This environment is ideal for testing and development purposes. 
-<img align="right" src="https://github.com/wagento/shopware/blob/Staging/images/staging1.jpg">
+
+## Architecture Overview
+<img align="center" src="https://github.com/wagento/shopware/blob/Staging/images/staging1.jpg">
 
 ## Prerequisites 
 
@@ -27,13 +29,13 @@ Installation of staging environment of Shopware using CloudFormation Template.
 
 1. Login to AWS account. 
 2. Search for CloudFormation. 
-   ![staging2.png](https://github.com/wagento/shopware/blob/Staging/images/staging2.png)
+![staging2.png](https://github.com/wagento/shopware/blob/Staging/images/staging2.png)
 3. Click on the “Create stack” button. 
-   ![staging3.png](https://github.com/wagento/shopware/blob/Staging/images/staging3.png)
+![staging3.png](https://github.com/wagento/shopware/blob/Staging/images/staging3.png)
 4. Select "Choose an existing template" > "Upload a template file" > Choose file. 
-   ![staging4.png](https://github.com/wagento/shopware/blob/Staging/images/staging4.png)
+![staging4.png](https://github.com/wagento/shopware/blob/Staging/images/staging4.png)
 5. Upload the CloudFormation template file and click "Next".
-   ![staging5.png](https://github.com/wagento/shopware/blob/Staging/images/staging5.png)
+![staging5.png](https://github.com/wagento/shopware/blob/Staging/images/staging5.png)
 6. Fill in the details: 
 
    - **Stack name**: Enter the name of the stack that you want to set. 
@@ -45,8 +47,8 @@ Installation of staging environment of Shopware using CloudFormation Template.
    - **SSHKey**: Select the SSH key. If none exists, create one. 
    - **VpcCIDR**: Enter the VPC CIDR subnet mask or use the predefined subnet mask. 
 
-7. Add tags and select the IAM Role. Click "Next" to deploy all resources. 
    ![staging6.png](https://github.com/wagento/shopware/blob/Staging/images/staging6.png)
+7. Add tags and select the IAM Role. Click "Next" to deploy all resources. 
 
 #### SSH Key Creation
 
