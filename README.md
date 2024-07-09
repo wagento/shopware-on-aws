@@ -19,7 +19,7 @@ Installation of Production Environment of Shopware using CloudFormation Template
 
 1. Login to AWS account. 
 2. Search for CloudFormation. 
-   ![production2.png](https://github.com/wagento/shopware/blob/main/images/production2.png)
+   <img align="center" src="https://github.com/wagento/shopware/blob/main/images/Production2.png">
 3. Click on the “Create stack” button. 
    ![production3.png](https://github.com/wagento/shopware/blob/main/images/production3.png)
 4. Select "Choose an existing template" > "Upload a template file" > Choose file.
