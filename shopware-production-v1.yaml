@@ -53,7 +53,7 @@ Parameters:
     AllowedPattern: '[a-zA-Z0-9]*'
     ConstraintDescription: must contain only alphanumeric characters.
   DBAllocatedStorage:
-    Default: '5'
+    Default: '20'
     Description: The size of the database (Gb)
     Type: Number
     MinValue: '5'
@@ -957,20 +957,6 @@ Resources:
           Value: lb_cookie
         - Key: stickiness.lb_cookie.duration_seconds
           Value: '30'
-  WebServerSecurityGroup:
-    Type: 'AWS::EC2::SecurityGroup'
-    Properties:
-      GroupDescription: Enable HTTP access via port 80 locked down to the ELB and SSH access
-      SecurityGroupIngress:
-        - IpProtocol: tcp
-          FromPort: '80'
-          ToPort: '80'
-          CidrIp: 0.0.0.0/0
-        - IpProtocol: tcp
-          FromPort: '22'
-          ToPort: '22'
-          CidrIp: !Ref SSHLocation
-      VpcId: !Ref VPC
   DBEC2SecurityGroup:
     Type: 'AWS::EC2::SecurityGroup'
     Properties:
@@ -979,7 +965,7 @@ Resources:
         - IpProtocol: tcp
           FromPort: '3306'
           ToPort: '3306'
-          SourceSecurityGroupId: !Ref WebServerSecurityGroup
+          SourceSecurityGroupId: !Ref ShopwareSecurityGroup
       VpcId: !Ref VPC
   MySQLDatabasesubnet:
     Type: AWS::RDS::DBSubnetGroup
@@ -1002,6 +988,16 @@ Resources:
       DBInstanceClass: !Ref DBInstanceClass
       AllocatedStorage: !Ref DBAllocatedStorage
     DependsOn: MySQLDatabasesubnet  
+  EFSFS:
+    Type: 'AWS::EFS::FileSystem'
+  EFSTM1:
+    Type: AWS::EFS::MountTarget
+    Properties:
+      FileSystemId: !Ref EFSFS
+      SubnetId: !Ref PublicSubnet1
+      SecurityGroups:
+      - Ref: "ShopwareSecurityGroup"
+    DependsOn: ShopwareSecurityGroup
 
   MyEC2Instance:
     Type: AWS::EC2::Instance
@@ -1009,7 +1005,7 @@ Resources:
       InstanceType: !Ref InstanceType
       SubnetId: !Ref PublicSubnet1
       SecurityGroupIds: 
-        - !GetAtt "MySecurityGroup.GroupId"
+        - !GetAtt "ShopwareSecurityGroup.GroupId"
       ImageId: !FindInMap 
         - AWSRegionArch2AMI
         - !Ref 'AWS::Region'
@@ -1031,13 +1027,20 @@ Resources:
             #!/bin/bash
             sudo -i
             yum update -y
+            efsdns=${EFSFS}.efs.${AWS::Region}.amazonaws.com
             amazon-linux-extras install docker -y
             systemctl start docker
             systemctl enable docker
-            docker run --rm -p 80:80 dockware/dev:latest
-    DependsOn: MySecurityGroup
+            docker volume create \
+              --driver local \
+              --opt type=nfs \
+              --opt o=addr=$efsdns,rw,nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2 \
+              --opt device=:/ efs
+            docker run --rm -v efs:/var/www/html -p 80:80 dockware/dev:latest
+
+    DependsOn: EFSTM1
         
-  MySecurityGroup:
+  ShopwareSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: Allow SSH and HTTP/HTTPS traffic
@@ -1055,6 +1058,12 @@ Resources:
           FromPort: '443'
           ToPort: '443'
           CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: '2049'
+          ToPort: '2049'
+          CidrIp: 0.0.0.0/0
+Outputs:
+  EFSMountTarget:
+    Description: Mount target for EFS
+    Value: !GetAtt EFSTM1.IpAddress
           
-          
-
