@@ -1,4 +1,4 @@
-# Shopware-Production
+# Shopware-Production-On-AWS
 
 Deploy a production environment for Shopware with separate RDS and EC2 instances for enhanced performance, security, and scalability. 
 
